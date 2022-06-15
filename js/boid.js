@@ -12,6 +12,10 @@ class Boid {
 	wrap(min, max, bleed = 10) {
 		const x = this.pos.x;
 		const y = this.pos.y;
+
+		if (x < min.x - bleed) {
+			this.pos.x = max.x + bleed;
+		}
 	}
 
 	update() {
