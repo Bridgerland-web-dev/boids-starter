@@ -2,6 +2,8 @@ class Boid {
 	pos = createVector(0, 0);
 	vel = createVector(0, 0);
 	acc = createVector(0, 0);
+	color = color(255);
+	scale = 1;
 
 	constructor(boid) {
 		this.pos = boid.pos || this.pos;
@@ -32,8 +34,19 @@ class Boid {
 	}
 
 	draw() {
-		stroke(255);
-		strokeWeight(10);
-		point(this.pos.x, this.pos.y);
+		fill(this.color);
+		noStroke();
+
+		push();
+		translate(this.pos.x, this.pos.y);
+		rotate(this.vel.heading() + PI / 2);
+		const scale = this.scale;
+		beginShape();
+		vertex(0 * scale, -7 * scale);
+		vertex(-3 * scale, 7 * scale);
+		vertex(0 * scale, 5 * scale);
+		vertex(3 * scale, 7 * scale);
+		endShape(CLOSE);
+		pop();
 	}
 }
