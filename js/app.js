@@ -17,10 +17,10 @@ function draw() {
 		for (const flockmate of flock) {
 			if (boid == flockmate) continue;
 
-			boid.assignSeparationForce(flockmate, separation);
+			boid.assignSeparationForce(flockmate, separation, 100);
 		}
 
-		boid.applySeparationForce(separation);
+		boid.applySeparationForce(separation, 0.5, 10);
 
 		boid.update();
 		boid.draw();
