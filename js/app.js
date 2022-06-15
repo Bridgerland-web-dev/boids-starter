@@ -12,6 +12,7 @@ function draw() {
 	for (let i = 0; i < flock.length; i++) {
 		const boid = flock[i];
 
+		boid.wrap(createVector(0, 0), createVector(width, height));
 		boid.update();
 		boid.draw();
 	}
