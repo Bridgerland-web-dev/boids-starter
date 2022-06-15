@@ -9,10 +9,19 @@ function setup() {
 function draw() {
 	background(31);
 
-	for (let i = 0; i < flock.length; i++) {
-		const boid = flock[i];
-
+	for (const boid of flock) {
 		boid.wrap(createVector(0, 0), createVector(width, height));
+
+		let separation = boid.createBoidForce();
+
+		for (const flockmate of flock) {
+			if (boid == flockmate) continue;
+
+			boid.assignSeparationForce(flockmate, separation);
+		}
+
+		boid.applySeparationForce(separation);
+
 		boid.update();
 		boid.draw();
 	}
