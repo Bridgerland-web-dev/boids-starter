@@ -9,6 +9,11 @@ class Boid {
 		this.acc = boid.acc || this.acc;
 	}
 
+	wrap(min, max, bleed = 10) {
+		const x = this.pos.x;
+		const y = this.pos.y;
+	}
+
 	update() {
 		this.vel.add(this.acc);
 		this.pos.add(this.vel);

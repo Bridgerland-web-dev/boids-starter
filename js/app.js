@@ -24,6 +24,7 @@ function summonBoids(count) {
 
 		const boid = new Boid({
 			pos: createVector(random(width), random(height)),
+			vel: velocity,
 		});
 		flock.push(boid);
 	}
