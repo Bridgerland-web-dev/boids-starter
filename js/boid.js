@@ -15,6 +15,13 @@ class Boid {
 
 		if (x < min.x - bleed) {
 			this.pos.x = max.x + bleed;
+		} else if (x > max.x + bleed) {
+			this.pos.x = min.x - bleed;
+		}
+		if (y < min.y - bleed) {
+			this.pos.y = max.y + bleed;
+		} else if (y > max.y + bleed) {
+			this.pos.y = min.y - bleed;
 		}
 	}
 
