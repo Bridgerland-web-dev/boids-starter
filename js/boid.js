@@ -4,6 +4,7 @@ class Boid {
 	acc = createVector(0, 0);
 	color = color(255);
 	scale = 1;
+	radius = 30;
 
 	constructor(boid) {
 		this.pos = boid.pos || this.pos;
@@ -27,6 +28,10 @@ class Boid {
 		} else if (y > max.y + bleed) {
 			this.pos.y = min.y - bleed;
 		}
+	}
+
+	applyForce(force) {
+		this.acc.add(force);
 	}
 
 	update() {
