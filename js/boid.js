@@ -9,6 +9,12 @@ class Boid {
 		this.acc = boid.acc || this.acc;
 	}
 
+	update() {
+		this.vel.add(this.acc);
+		this.pos.add(this.vel);
+		this.acc.mult(0);
+	}
+
 	draw() {
 		stroke(255);
 		strokeWeight(10);
