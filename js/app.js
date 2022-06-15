@@ -3,7 +3,7 @@ const flock = [];
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 
-	summonBoids(100);
+	summonBoids(200);
 }
 
 function draw() {
@@ -26,6 +26,8 @@ function summonBoids(count) {
 		const boid = new Boid({
 			pos: createVector(random(width), random(height)),
 			vel: velocity,
+			color: color(random(250, 255), random(50, 255), 100),
+			scale: 2,
 		});
 		flock.push(boid);
 	}
