@@ -9,6 +9,8 @@ class Boid {
 		this.pos = boid.pos || this.pos;
 		this.vel = boid.vel || this.vel;
 		this.acc = boid.acc || this.acc;
+		this.color = boid.color || this.color;
+		this.scale = boid.scale || this.scale;
 	}
 
 	wrap(min, max, bleed = 10) {
