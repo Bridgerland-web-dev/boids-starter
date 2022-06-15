@@ -34,6 +34,42 @@ class Boid {
 		this.acc.add(force);
 	}
 
+	createBoidForce() {
+		return [createVector(0, 0), 0];
+	}
+
+	assignSeparationForce(flockmate, boidForce, radius = undefined) {
+		const r = radius ?? this.radius;
+		const [force] = boidForce;
+
+		const d = dist(
+			this.pos.x,
+			this.pos.y,
+			flockmate.pos.x,
+			flockmate.pos.y,
+		);
+
+		if (d < r) {
+			const diff = p5.Vector.sub(this.pos, flockmate.pos);
+			diff.div(d);
+			force.add(diff);
+
+			boidForce[0].add(diff);
+			boidForce[1]++;
+		}
+	}
+
+	applySeparationForce(boidForce, maxForce = 0.2, maxSpeed = 4) {
+		const [force, count] = boidForce;
+		if (count > 0) {
+			force.div(count);
+			force.mult(maxSpeed);
+			force.sub(this.vel);
+			force.limit(maxForce);
+			this.applyForce(force);
+		}
+	}
+
 	update() {
 		this.vel.add(this.acc);
 		this.pos.add(this.vel);
