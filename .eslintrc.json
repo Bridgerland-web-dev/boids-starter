@@ -1,0 +1,39 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": ["eslint:recommended", "@fal-works/p5js", "plugin:import/recommended"],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+				"import/named": 2,
+				"import/no-dynamic-require": 0,
+				"import/no-named-as-default": 0
+    },
+		"globals": {
+			"Boid": true,
+			"wrapBoidAroundScreen": true,
+			"updateBoid": true,
+			"flockBoid": true,
+			"drawBoid": true
+		}
+}
