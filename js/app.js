@@ -1,13 +1,20 @@
 const flock = [];
 let max, min;
 
+let sound;
+let isPlaying = false;
+
+function preload() {
+	sound = loadSound("./noise.mp3");
+}
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 
 	min = createVector(0, 0);
 	max = createVector(width, height);
 
-	summonBoids(100);
+	summonBoids(200);
 }
 
 function windowResized() {
@@ -38,15 +45,10 @@ function draw() {
 		boid.applyCohesionForce(cohesion, 0.2, 2.8);
 
 		if (mouseIsPressed) {
-			boid.applyAvoidPointForce(
-				createVector(mouseX, mouseY),
-				0.25,
-				3,
-				200,
-			);
+			boid.applyAvoidPointForce(createVector(mouseX, mouseY), 4, 30, 500);
 		}
 
-		boid.update(3.5);
+		boid.update(30);
 		boid.draw();
 	}
 }
