@@ -22,6 +22,20 @@ function windowResized() {
 	max = createVector(windowWidth, windowHeight);
 }
 
+function mousePressed() {
+	if (!isPlaying) {
+		isPlaying = true;
+		sound.play();
+	}
+}
+
+function mouseReleased() {
+	if (isPlaying) {
+		isPlaying = false;
+		sound.stop();
+	}
+}
+
 function draw() {
 	background(31);
 
