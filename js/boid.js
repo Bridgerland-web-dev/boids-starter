@@ -139,6 +139,14 @@ class Boid {
 			steering.add(diff);
 			count++;
 		}
+
+		if (count > 0) {
+			steering.div(count);
+			steering.setMag(maxSpeed);
+			steering.sub(this.vel);
+			steering.limit(maxForce);
+			this.applyForce(steering);
+		}
 	}
 
 	update(maxSpeed = 5) {
