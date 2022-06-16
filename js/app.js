@@ -7,7 +7,7 @@ function setup() {
 	min = createVector(0, 0);
 	max = createVector(width, height);
 
-	summonBoids(200);
+	summonBoids(100);
 }
 
 function windowResized() {
@@ -28,16 +28,25 @@ function draw() {
 		for (const flockmate of flock) {
 			if (boid == flockmate) continue;
 
-			boid.assignSeparationForce(flockmate, separation, 40);
+			boid.assignSeparationForce(flockmate, separation, 30);
 			boid.assignAlignmentForce(flockmate, alignment, 60);
-			boid.assignCohesionForce(flockmate, cohesion, 30);
+			boid.assignCohesionForce(flockmate, cohesion, 40);
 		}
 
-		boid.applySeparationForce(separation, 0.095, 3);
-		boid.applyAlignmentForce(alignment, 0.2, 3.25);
-		boid.applyCohesionForce(cohesion, 0.1, 3);
+		boid.applySeparationForce(separation, 0.23, 3.1);
+		boid.applyAlignmentForce(alignment, 0.15, 3.12);
+		boid.applyCohesionForce(cohesion, 0.2, 2.8);
 
-		boid.update(4);
+		if (mouseIsPressed) {
+			boid.applyAvoidPointForce(
+				createVector(mouseX, mouseY),
+				0.25,
+				3,
+				200,
+			);
+		}
+
+		boid.update(3.5);
 		boid.draw();
 	}
 }
@@ -50,7 +59,7 @@ function summonBoids(count) {
 		const boid = new Boid({
 			pos: createVector(random(width), random(height)),
 			vel: velocity,
-			color: color(random(50, 255), random(50, 255), 150),
+			color: color(random(250, 255), random(100, 255), 50),
 			scale: 2,
 		});
 		flock.push(boid);
