@@ -108,7 +108,18 @@ class Boid {
 		}
 	}
 
-	applyCohesionForce(boidForce, maxForce = 0.2, maxSpeed = 4) {}
+	applyCohesionForce(boidForce, maxForce = 0.2, maxSpeed = 4) {
+		const [force, count] = boidForce;
+
+		if (count > 0) {
+			force.div(count);
+			force.sub(this.pos);
+			force.setMag(maxSpeed);
+			force.sub(this.vel);
+			force.limit(maxForce);
+			this.applyForce(force);
+		}
+	}
 
 	update(maxSpeed = 5) {
 		this.vel.add(this.acc);
