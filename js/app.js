@@ -4,6 +4,11 @@ let max, min;
 let sound;
 let isPlaying = false;
 
+let hasCleaned = true;
+
+let red = 0;
+let isRed = false;
+
 function preload() {
 	sound = loadSound("./noise.mp3");
 }
@@ -36,11 +41,39 @@ function mouseReleased() {
 	}
 }
 
+function keyPressed() {
+	if (key == " ") {
+		hasCleaned = false;
+	}
+}
+
+function keyReleased() {
+	if (key == " ") {
+		hasCleaned = true;
+	}
+
+	if (key == "r") {
+		if (isRed == true) {
+			isRed = false;
+			red = 0;
+		} else {
+			isRed = true;
+			red = 255;
+		}
+	}
+
+	// if (key == "r") {
+	// 	red = 0;
+	// }
+}
+
 function draw() {
-	background(31);
+	if (hasCleaned) background(31);
 
 	for (const boid of flock) {
 		boid.wrap(min, max);
+
+		boid.color = color(red, 150, random(10, 200));
 
 		let separation = boid.createBoidForce();
 		let alignment = boid.createBoidForce();
@@ -59,7 +92,14 @@ function draw() {
 		boid.applyCohesionForce(cohesion, 0.2, 2.8);
 
 		if (mouseIsPressed) {
-			boid.applyAvoidPointForce(createVector(mouseX, mouseY), 4, 30, 500);
+			if (mouseButton === RIGHT) {
+				boid.applyAvoidPointForce(
+					createVector(mouseX, mouseY),
+					4,
+					30,
+					500,
+				);
+			}
 		}
 
 		boid.update(30);
@@ -71,11 +111,12 @@ function summonBoids(count) {
 	for (let i = 0; i < count; i++) {
 		const velocity = p5.Vector.random2D();
 		velocity.setMag(random(2, 4));
+		const c = color(red, random(100, 255), 50);
 
 		const boid = new Boid({
 			pos: createVector(random(width), random(height)),
 			vel: velocity,
-			color: color(random(250, 255), random(100, 255), 50),
+			color: c,
 			scale: 2,
 		});
 		flock.push(boid);
