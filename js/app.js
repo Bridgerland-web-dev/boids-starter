@@ -28,16 +28,16 @@ function draw() {
 		for (const flockmate of flock) {
 			if (boid == flockmate) continue;
 
-			boid.assignSeparationForce(flockmate, separation, 30);
-			boid.assignAlignmentForce(flockmate, alignment, 80);
-			boid.assignCohesionForce(flockmate, cohesion, 40);
+			boid.assignSeparationForce(flockmate, separation, 40);
+			boid.assignAlignmentForce(flockmate, alignment, 60);
+			boid.assignCohesionForce(flockmate, cohesion, 30);
 		}
 
-		boid.applySeparationForce(separation, 0.02, 3);
-		boid.applyAlignmentForce(alignment, 0.2, 3);
+		boid.applySeparationForce(separation, 0.095, 3);
+		boid.applyAlignmentForce(alignment, 0.2, 3.25);
 		boid.applyCohesionForce(cohesion, 0.1, 3);
 
-		boid.update(5);
+		boid.update(4);
 		boid.draw();
 	}
 }

@@ -121,6 +121,26 @@ class Boid {
 		}
 	}
 
+	applyAvoidPointForce(
+		vector,
+		maxForce = 0.2,
+		maxSpeed = 4,
+		radius = undefined,
+	) {
+		const r = radius ?? this.radius;
+		const steering = createVector(0, 0);
+		let count = 0;
+
+		const d = dist(this.pos.x, this.pos.y, vector.x, vector.y);
+
+		if (d < r) {
+			const diff = p5.Vector.sub(this.pos, vector);
+			diff.div(d);
+			steering.add(diff);
+			count++;
+		}
+	}
+
 	update(maxSpeed = 5) {
 		this.vel.add(this.acc);
 		this.vel.limit(maxSpeed);
@@ -143,5 +163,6 @@ class Boid {
 		vertex(3 * scale, 7 * scale);
 		endShape(CLOSE);
 		pop();
+		// ellipse(this.pos.x, this.pos.y, this.scale * 20, this.scale * 20);
 	}
 }
