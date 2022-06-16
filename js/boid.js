@@ -71,6 +71,18 @@ class Boid {
 		}
 	}
 
+	assignAlignmentForce(flockmate, boidForce, radius = undefined) {
+		const r = radius ?? this.radius;
+		let d = dist(this.pos.x, this.pos.y, flockmate.pos.x, flockmate.pos.y);
+
+		if (d < r) {
+			boidForce[0].add(flockmate.vel);
+			boidForce[1]++;
+		}
+	}
+
+	applyAlignmentForce(boidForce, maxForce = 0.2, maxSpeed = 4) {}
+
 	update(maxSpeed = 5) {
 		this.vel.add(this.acc);
 		this.vel.limit(maxSpeed);

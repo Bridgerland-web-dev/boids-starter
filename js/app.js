@@ -31,7 +31,7 @@ function draw() {
 
 		boid.applySeparationForce(separation, 0.02, 10);
 
-		boid.update();
+		boid.update(5);
 		boid.draw();
 	}
 }
