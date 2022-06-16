@@ -9,6 +9,8 @@ let hasCleaned = true;
 let red = 0;
 let isRed = false;
 
+const MAX_SPEED = 5;
+
 function preload() {
 	sound = loadSound("./noise.mp3");
 }
@@ -61,10 +63,6 @@ function keyReleased() {
 			red = 255;
 		}
 	}
-
-	// if (key == "r") {
-	// 	red = 0;
-	// }
 }
 
 function draw() {
@@ -73,7 +71,9 @@ function draw() {
 	for (const boid of flock) {
 		boid.wrap(min, max);
 
-		boid.color = color(red, 150, random(10, 200));
+		const redAmt = map(boid.vel.mag(), 0, MAX_SPEED, 0, 255);
+
+		boid.color = color(redAmt, 255 - redAmt, 50);
 
 		let separation = boid.createBoidForce();
 		let alignment = boid.createBoidForce();
@@ -102,7 +102,7 @@ function draw() {
 			}
 		}
 
-		boid.update(30);
+		boid.update(MAX_SPEED);
 		boid.draw();
 	}
 }
@@ -110,7 +110,7 @@ function draw() {
 function summonBoids(count) {
 	for (let i = 0; i < count; i++) {
 		const velocity = p5.Vector.random2D();
-		velocity.setMag(random(2, 4));
+		velocity.setMag(random(1, 5));
 		const c = color(red, random(100, 255), 50);
 
 		const boid = new Boid({
