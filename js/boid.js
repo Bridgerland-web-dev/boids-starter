@@ -93,6 +93,23 @@ class Boid {
 		}
 	}
 
+	assignCohesionForce(flockmate, boidForce, radius = undefined) {
+		const r = radius ?? this.radius;
+		const d = dist(
+			this.pos.x,
+			this.pos.y,
+			flockmate.pos.x,
+			flockmate.pos.y,
+		);
+
+		if (d < r) {
+			boidForce[0].add(flockmate.pos);
+			boidForce[1]++;
+		}
+	}
+
+	applyCohesionForce(boidForce, maxForce = 0.2, maxSpeed = 4) {}
+
 	update(maxSpeed = 5) {
 		this.vel.add(this.acc);
 		this.vel.limit(maxSpeed);
