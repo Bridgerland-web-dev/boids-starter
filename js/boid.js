@@ -81,7 +81,17 @@ class Boid {
 		}
 	}
 
-	applyAlignmentForce(boidForce, maxForce = 0.2, maxSpeed = 4) {}
+	applyAlignmentForce(boidForce, maxForce = 0.2, maxSpeed = 4) {
+		const [force, count] = boidForce;
+
+		if (count > 0) {
+			force.div(count);
+			force.setMag(maxSpeed);
+			force.sub(this.vel);
+			force.limit(maxForce);
+			this.applyForce(force);
+		}
+	}
 
 	update(maxSpeed = 5) {
 		this.vel.add(this.acc);
