@@ -12,6 +12,7 @@ class Boid {
 		this.acc = boid.acc || this.acc;
 		this.color = boid.color || this.color;
 		this.scale = boid.scale || this.scale;
+		this.radius = boid.radius || this.radius;
 	}
 
 	wrap(min, max, bleed = 10) {
@@ -70,8 +71,9 @@ class Boid {
 		}
 	}
 
-	update() {
+	update(maxSpeed = 5) {
 		this.vel.add(this.acc);
+		this.vel.limit(maxSpeed);
 		this.pos.add(this.vel);
 		this.acc.mult(0);
 	}
