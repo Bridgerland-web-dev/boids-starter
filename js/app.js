@@ -9,7 +9,7 @@ let hasCleaned = true;
 let red = 0;
 let isRed = false;
 
-const MAX_SPEED = 5;
+const MAX_SPEED = 20;
 
 function preload() {
 	sound = loadSound("./noise.mp3");
@@ -83,26 +83,21 @@ function draw() {
 			if (boid == flockmate) continue;
 
 			boid.assignSeparationForce(flockmate, separation, 30);
-			boid.assignAlignmentForce(flockmate, alignment, 60);
+			boid.assignAlignmentForce(flockmate, alignment, 30);
 			boid.assignCohesionForce(flockmate, cohesion, 40);
 		}
 
 		boid.applySeparationForce(separation, 0.23, 3.1);
 		boid.applyAlignmentForce(alignment, 0.15, 3.12);
-		boid.applyCohesionForce(cohesion, 0.2, 2.8);
+		boid.applyCohesionForce(cohesion, 0.08, 2.8);
 
 		if (mouseIsPressed) {
-			if (mouseButton === RIGHT) {
-				boid.applyAvoidPointForce(
-					createVector(mouseX, mouseY),
-					4,
-					30,
-					500,
-				);
-			}
+			// if (mouseButton === RIGHT) {
+			boid.applyAvoidPointForce(createVector(mouseX, mouseY), 2, 20, 500);
+			// }
 		}
 
-		boid.update(MAX_SPEED);
+		boid.update(20);
 		boid.draw();
 	}
 }

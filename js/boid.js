@@ -149,6 +149,33 @@ class Boid {
 		}
 	}
 
+	applyPursuePointForce(
+		vector,
+		maxForce = 0.2,
+		maxSpeed = 4,
+		radius = undefined,
+	) {
+		const r = radius ?? this.radius;
+		const steering = createVector(0, 0);
+		let count = 0;
+
+		const d = dist(this.pos.x, this.pos.y, vector.x, vector.y);
+
+		if (d < r) {
+			steering.add(vector);
+			count++;
+		}
+
+		if (count > 0) {
+			steering.div(count);
+			steering.sub(this.pos);
+			steering.setMag(maxSpeed);
+			steering.sub(this.vel);
+			steering.limit(maxForce);
+			this.applyForce(steering);
+		}
+	}
+
 	update(maxSpeed = 5) {
 		this.vel.add(this.acc);
 		this.vel.limit(maxSpeed);
