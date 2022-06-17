@@ -92,9 +92,21 @@ function draw() {
 		boid.applyCohesionForce(cohesion, 0.08, 2.8);
 
 		if (mouseIsPressed) {
-			// if (mouseButton === RIGHT) {
-			boid.applyAvoidPointForce(createVector(mouseX, mouseY), 2, 20, 500);
-			// }
+			if (mouseButton === LEFT) {
+				boid.applyAvoidPointForce(
+					createVector(mouseX, mouseY),
+					2,
+					20,
+					500,
+				);
+			} else if (mouseButton === RIGHT) {
+				boid.applyPursuePointForce(
+					createVector(mouseX, mouseY),
+					1,
+					8,
+					400,
+				);
+			}
 		}
 
 		boid.update(20);
